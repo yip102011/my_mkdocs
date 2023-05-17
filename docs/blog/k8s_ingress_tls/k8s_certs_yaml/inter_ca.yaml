@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: inter-ca
+spec:
+  isCA: true
+  commonName: Intermediate CA
+  secretName: inter-ca
+  usages: 
+    - signing
+    - cert sign
+    - crl sign
+  privateKey:
+    encoding: PKCS8
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: root-ca-issuer
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: inter-ca-issuer
+spec:
+  ca:
+    secretName: inter-ca
