@@ -1,15 +1,12 @@
 ---
-title: Other Cheat Sheet
-date: "2022-10-10"
+title: K8S Cheat Sheet
 tags:
+  - k8s
+  - kubernetes
   - cheat-sheet
 aliases:
-  - my-other-cheat-sheet
+  - k8s-cheat-sheet
 ---
-
-My other cheat Sheet
-
-<!--more-->
 
 ## Kubernetes
 
@@ -30,7 +27,24 @@ kubectl get pod -o custom-columns=POD_NAME:.metadata.name,CONTAINER:.spec.contai
 # kubectl list all nodeport
 kubectl get svc --all-namespaces -o go-template='{{range .items}}{{ $svc := . }}{{range.spec.ports}}{{if .nodePort}}{{.nodePort}}{{","}}{{if .name}}{{printf "%-10s" .name}}{{else}}{{printf "%-10s" ""}}{{end}}{{","}}{{$svc.metadata.namespace}}{{","}}{{$svc.metadata.name}}{{"\n"}}{{end}}{{end}}{{end}}'
 
-# create nodeport svc
+# backup etcd data
+sudo ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/apiserver-etcd-client.crt \
+  --key=/etc/kubernetes/pki/apiserver-etcd-client.key \
+  snapshot save ~/etcd_backup
+
+# view container log
+sudo docker logs -n 100 -f $(sudo docker ps -f name=k8s_kube-vip -q)
+sudo docker logs -n 100 -f $(sudo docker ps -f name=k8s_etcd -q)
+sudo docker logs -n 100 -f $(sudo docker ps -f name=k8s_kube-apiserver -q)
+sudo docker logs -n 100 -f $(sudo docker ps -f name=k8s_kube-scheduler -q)
+sudo docker logs -n 100 -f $(sudo docker ps -f name=k8s_kube-controller-manager -q)
+```
+
+### Kubernetes - create nodeport svc
+
+```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Service
@@ -45,22 +59,11 @@ spec:
     app: my-app
   type: NodePort
 EOF
+```
 
-# backup etcd data
-sudo ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
-  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
-  --cert=/etc/kubernetes/pki/apiserver-etcd-client.crt \
-  --key=/etc/kubernetes/pki/apiserver-etcd-client.key \
-  snapshot save ~/etcd_backup
-  
-# view container log
-sudo docker logs -n 100 -f $(sudo docker ps -f name=k8s_kube-vip -q)
-sudo docker logs -n 100 -f $(sudo docker ps -f name=k8s_etcd -q)
-sudo docker logs -n 100 -f $(sudo docker ps -f name=k8s_kube-apiserver -q)
-sudo docker logs -n 100 -f $(sudo docker ps -f name=k8s_kube-scheduler -q)
-sudo docker logs -n 100 -f $(sudo docker ps -f name=k8s_kube-controller-manager -q)
+### Kubernetes - Create kubeconfig file
 
-# create kubeconfig file
+```bash
 NAMESPACE=default
 USER_NAME=my-user
 
@@ -111,6 +114,50 @@ helm ls -A
 helm get values my-redis -n redis
 ```
 
+## Helm chart
+
+```yaml
+# add checksum to auto update deployment yaml if config map is changed
+annotations:
+  checksum/config: { { include (print $.Template.BasePath "/configmap.yaml") . | sha256sum } }
+```
+
+```yaml
+# add config as json file or key value
+{{- if .Values.config }}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: dotnet-config-cm
+data:
+
+{{- $config_json := .Values.config.config_json -}}
+{{- if $config_json }}
+  config.json: |
+{{ $config_json | indent 4 }}
+{{- end }}
+
+{{- range $key, $value := .Values.config_key_value }}
+  {{ $key }}: "{{ $value }}"
+{{- end }}
+
+{{- end }}
+```
+
+```yaml
+# distribute pod into diff node
+# pod.spec.
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: "{{ $app_name }}"
+          topologyKey: "kubernetes.io/hostname"
+```
+
 ## ArgoCD
 
 Ref: https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd/
@@ -137,71 +184,4 @@ kubectl patch Application --type=merge -n=argocd -p '{"spec":{"source":{"helm":{
 # set app param2
 kubectl exec deploy/argocd-server -n argocd -- bash -c "argocd login 127.0.0.1:8080 --insecure --username admin --password 'XXXXXX'"
 kubectl exec deploy/argocd-server -n argocd -- bash -c "argocd app set my-app -p replicaCount=0"
-```
-
-## Docker
-
-```bash
-# remove image
-docker image rm my-reg/my-image:latest
-
-# remove image with filter
-docker image rm $(docker images --filter=reference='my-reg/*' --format "{{.Repository}}:{{.Tag}}")
-
-# add new tag
-docker tag "my-reg/my-image:latest" "my-reg/my-image:new-tag"
-
-# docker save image as file
-docker save -o "my-image.tar" "my-reg/my-image:latest"
-
-# docker load image file
-docker load --input "my-image.tar"
-
-# rm all image that is not latest tag
-docker image rm $(docker images | awk 'NR!=1 && $2 !~ /<none>/ && $2 !~ /^latest$)/ {print $1":"$2}')
-```
-
-## mongodb
-
-```bash
-# backup database to file
-mongodump --uri="mongodb://admin:XXXXXW@192.168.0.101:10001,192.168.0.102:10002,192.168.0.103:10003/?authSource=admin&replicaSet=my_replica_set&readPreference=primary" --out=mongodump/ --db=my_db
-
-# restore database from file
-mongorestore --uri="mongodb://admin:XXXXXW@192.168.0.101:10001,192.168.0.102:10002,192.168.0.103:10003/?authSource=admin&replicaSet=my_replica_set&readPreference=primary" --db=my_db mongodump/my_db
-```
-
-## minio-client
-
-```bash
-# create config file
-mkdir -p $HOME/.mc/
-tee $HOME/.mc/config.json <<EOF
-{
-  "version": "10",
-  "aliases": {
-    "myminio": {
-      "url": "http://192.168.0.100:9000",
-      "accessKey": "xxxxxxxxxxxxxxxx",
-      "secretKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-      "api": "s3v4",
-      "path": "auto"
-    }
-  }
-}
-EOF
-
-# upload files in /minio-tmp/* to minio server
-docker run --rm -it --entrypoint='' \
--v /minio-tmp/:/minio-tmp/ \
--v $HOME/.mc/config.json:$HOME/.mc/config.json \
-minio/mc \
-sh -c 'mc cp /minio-tmp/* myminio/my-bucket'
-
-# delete files older than 7 days in minio server
-docker run --rm -it --entrypoint='' \
--v $HOME/.mc/config.json:$HOME/.mc/config.json \
-minio/mc \
-sh -c 'mc find myminio/my-bucket --older-than 7d --exec 'mc rm {}''
-
 ```

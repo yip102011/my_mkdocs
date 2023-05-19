@@ -34,6 +34,12 @@ line1
 line2
 EOT
 
+# create multi line file with tee
+sudo tee -a ~/.ssh/config << END
+Host localhost
+  ForwardAgent yes
+END
+
 # scp upload folder
 scp -r "~/some_folder" user@remote_host:~/
 
@@ -137,7 +143,7 @@ systemctl status *swap* --all
 
 > ref: [kernel swappiness](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v1/memory.html?highlight=swappiness#swappiness)
 
-## find
+## find command
 
 [Linux manual page - find](https://man7.org/linux/man-pages/man1/find.1.html)
 
