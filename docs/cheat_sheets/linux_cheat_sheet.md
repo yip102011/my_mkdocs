@@ -12,19 +12,6 @@ My linux cheat Sheet base on Ubuntu
 
 <!--more-->
 
-## awk
-
-```bash
-# skip first line, useful for skip colume name
-awk 'NR!=1 {print}'
-# filter when colume one not match regex pattern
-awk '$1 !~ /^some-regex-pattern$/ {print}')
-# print colume 1, 2 and added "|" in between
-awk '{print $1"|"$2}')
-# print with right padding space
-awk '{printf "%-20s %-20s\n",$1,$2}'
-```
-
 ## basic
 
 ```bash
@@ -40,18 +27,35 @@ Host localhost
   ForwardAgent yes
 END
 
-# scp upload folder
-scp -r "~/some_folder" user@remote_host:~/
+# check memory usage
+htop
+free -h
+```
 
-# upload key for login
-scp "~/.ssh/id_rsa.pub" user@remote_host:~/.ssh/authorized_keys
+## awk
+
+```bash
+# skip first line, useful for skip colume name
+awk 'NR!=1 {print}'
+# filter when colume one not match regex pattern
+awk '$1 !~ /^some-regex-pattern$/ {print}')
+# print colume 1, 2 and added "|" in between
+awk '{print $1"|"$2}')
+# print with right padding space
+awk '{printf "%-20s %-20s\n",$1,$2}'
+```
+
+## ssh
+
+```bash
+# upload key for login (append key to ~/.ssh/authorized_keys)
+ssh-copy-id user@remote_host
 
 # ssh tunnel
 ssh user@remote_host -L <local_port>:<target_host>:<target_port>
 
-# check memory usage
-htop
-free -h
+# scp upload folder
+scp -r "~/some_folder" user@remote_host:~/
 ```
 
 ## sync time with hk ntp server
@@ -100,7 +104,7 @@ apt update
 > - ref: https://manpages.ubuntu.com/manpages/xenial/man5/sources.list.5.html
 > - ref: https://help.ubuntu.com/community/Repositories/Ubuntu
 
-## disk related
+## extend disk size
 
 ```bash
 # check total dir size
@@ -115,6 +119,28 @@ sudo parted -l
 (parted) resizepart 1 100%
 (parted) quit
 sudo resize2fs /dev/sda
+```
+
+## extend disk size (with logical volume manager)
+
+![](linux_cheat_sheet_img_1.png)
+![](linux_cheat_sheet_img_2.jpg)
+
+```bash
+# ref: https://packetpushers.net/ubuntu-extend-your-default-lvm-space/
+
+# rescan disk size
+sudo echo 1>/sys/class/block/sda/device/rescan
+
+# resize disk
+sudo cfdisk # step: resize > write > quit
+
+# extend logical volumes
+sudo lvdisplay
+sudo lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+
+# resize
+resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 ```
 
 ## disable swap and kswapd0
@@ -145,8 +171,6 @@ systemctl status *swap* --all
 
 ## find command
 
-[Linux manual page - find](https://man7.org/linux/man-pages/man1/find.1.html)
-
 ```bash
 # search log file
 find /var/log -iname '*.log' -type f
@@ -164,8 +188,10 @@ find $HOME -type f -ctime +7
 find $HOME -type f -mmin -60
 
 # move
-find $HOME -type f -name "test.txt" -exec move {} ./new_dir/ \;
+find $HOME -type f -name "*.txt" -exec move {} ./new_dir/ \;
 ```
+
+> ref: [Linux manual page - find](https://man7.org/linux/man-pages/man1/find.1.html)
 
 ## archive log files
 
