@@ -119,7 +119,50 @@ helm get values my-redis -n redis
 ```yaml
 # add checksum to auto update deployment yaml if config map is changed
 annotations:
-  checksum/config: { { include (print $.Template.BasePath "/configmap.yaml") . | sha256sum } }
+  checksum/configmap: { { include (print $.Template.BasePath "/configmap.yaml") . | sha256sum } }
+
+# print yaml with nindent in every line
+{{- toYaml .Values.resources | nindent 12 }}
+
+# if else
+{{- if .Values.enabled }}
+{{- else }}
+{{- end }}
+
+# redefine root var in scrope
+{{- with .Values.nodeSelector }}
+      nodeSelector:
+{{- toYaml . | nindent 8 }}
+{{- end }}
+
+# avoid null error
+{{- if (.Values.pvc).enabled -}}{{- end -}}
+
+# rename var
+{{- $ingressPath := .Values.ingress.path -}}
+
+# prefer deploy pod in diff node
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchLabels:
+            app: "{{ $name }}"
+        topologyKey: "kubernetes.io/hostname"
+
+# loop key value
+{{- range $key, $value := .Values.config }}
+{{- if and (ne $key "my_key") }}
+  {{ $key }}: "{{ $value }}"
+{{- end }}
+
+# base64 encode for secret
+{{ $value | b64enc }}
+
+# default value
+{{ $service.type | default "ClusterIP" }}
 ```
 
 ```yaml
