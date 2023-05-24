@@ -22,10 +22,10 @@ line2
 EOT
 
 # create multi line file with tee
-sudo tee -a ~/.ssh/config << END
+sudo tee -a ~/.ssh/config << EOF
 Host localhost
   ForwardAgent yes
-END
+EOF
 
 # check memory usage
 htop
@@ -48,6 +48,9 @@ awk '{printf "%-20s %-20s\n",$1,$2}'
 ## ssh
 
 ```bash
+# gen key pair (/home/admin/.ssh/id_rsa file.)
+ssh-keygen
+
 # upload key for login (append key to ~/.ssh/authorized_keys)
 ssh-copy-id user@remote_host
 

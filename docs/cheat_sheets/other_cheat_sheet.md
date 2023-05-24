@@ -78,4 +78,14 @@ sh -c 'mc find myminio/my-bucket --older-than 7d --exec 'mc rm {}''
 
 ```
 
-# 
+## jasper report
+
+```bash
+# export
+JASPER_INSTALLED_PATH=/mnt/jasper/
+cd /${JASPER_INSTALLED_PATH}/buildomatic/
+./js-export.sh --everything --keyalias deprecatedImportExportEncSecret --output-zip /mnt/jasper_backup/jasper_full_backup_$(date +'%Y%m%d_%H%M').zip
+
+# crontab for backup every day and keep 7 days
+0 5 * * * find /mnt/jasper_backup/ -mtime +1 -name "jasper_full_backup_*.zip" -delete && cd $JASPER_INSTALLED_PATH/buildomatic/ && ./js-export.sh --everything --keyalias deprecatedImportExportEncSecret --output-zip /mnt/jasper_backup/jasper_full_backup_$(date +'%Y%m%d_%H%M').zip
+```
