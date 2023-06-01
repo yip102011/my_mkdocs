@@ -48,10 +48,10 @@ awk '{printf "%-20s %-20s\n",$1,$2}'
 ## ssh
 
 ```bash
-# gen key pair (/home/admin/.ssh/id_rsa file.)
+# gen key pair (id_rsa, id_rsa.pub) in folder `/home/admin/.ssh/`
 ssh-keygen
 
-# upload key for login (append key to ~/.ssh/authorized_keys)
+# upload key for login (append key to user@remote_host:~/.ssh/authorized_keys)
 ssh-copy-id user@remote_host
 
 # ssh tunnel
@@ -192,6 +192,12 @@ find $HOME -type f -mmin -60
 
 # move
 find $HOME -type f -name "*.txt" -exec move {} ./new_dir/ \;
+
+
+0 4 1 * * rm /mnt/data/tmp_upload_images/trash_can/* -rf
+
+0 4 * * * find /mnt/data/tmp_upload_images/trash_can -type f -ctime +30 -exec rm {} -f \;
+5 4 * * * find /mnt/data/tmp_upload_images/trash_can -type d -ctime +30 -exec rm {} -d -f \;
 ```
 
 > ref: [Linux manual page - find](https://man7.org/linux/man-pages/man1/find.1.html)

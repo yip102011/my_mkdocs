@@ -89,3 +89,25 @@ cd /${JASPER_INSTALLED_PATH}/buildomatic/
 # crontab for backup every day and keep 7 days
 0 5 * * * find /mnt/jasper_backup/ -mtime +1 -name "jasper_full_backup_*.zip" -delete && cd $JASPER_INSTALLED_PATH/buildomatic/ && ./js-export.sh --everything --keyalias deprecatedImportExportEncSecret --output-zip /mnt/jasper_backup/jasper_full_backup_$(date +'%Y%m%d_%H%M').zip
 ```
+
+## tls renew ca cert
+
+```bash
+# generate csr using public key and cert info from `root_ca.crt`
+openssl x509 -x509toreq -in root_ca.crt -signkey root_ca.key -out new_root_ca.csr
+
+# sign new csr file with old private key and set expire date
+openssl x509 -req -days 36500 -in new_root_ca.csr -signkey root_ca.key -out new_root_ca.crt
+```
+
+## tls cert verify
+
+```bash
+# verify cert and key are match
+KEY_MD5=$(openssl rsa -noout -modulus -in root_ca.key | openssl md5 | cut -c 10-)
+CERT_MD5=$(openssl x509 -noout -modulus -in new_root_ca.crt | openssl md5 | cut -c 10-)
+if [ "$KEY_MD5" = "$CERT_MD5" ]; then echo "match"; else echo "not match"; fi
+
+# verify server cert is issuer by ca
+openssl verify -CAfile ca.crt -verbose server.crt
+```
