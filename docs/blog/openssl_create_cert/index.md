@@ -55,7 +55,7 @@ openssl x509 -in root_ca_crt.pem -text
 
 ```bash
 # 憑證配置
-# cert config
+# cert config, ref: https://www.openssl.org/docs/man1.0.2/man5/x509v3_config.html
 tee inter_ca_ext.cnf <<EOF
 [inter_ca_ext]
 subjectKeyIdentifier    = hash
