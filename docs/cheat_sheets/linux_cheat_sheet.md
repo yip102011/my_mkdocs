@@ -133,7 +133,7 @@ sudo resize2fs /dev/sda
 # ref: https://packetpushers.net/ubuntu-extend-your-default-lvm-space/
 
 # rescan disk size
-sudo echo 1>/sys/class/block/sda/device/rescan
+echo 1 | sudo tee /sys/class/block/sda/device/rescan
 
 # resize disk
 sudo cfdisk # step: resize > write > quit
@@ -153,7 +153,8 @@ resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 swapoff -a
 
 # 0 swappiness really prevents from any swapping even if there is a swap storage available
-echo 'vm.swappiness=0' > /etc/sysctl.d/swappiness_zero.conf
+echo 'vm.swappiness=0' | sudo tee /etc/sysctl.d/swappiness_zero.conf
+
 # reload all sysctl config
 sysctl --system
 
@@ -192,12 +193,6 @@ find $HOME -type f -mmin -60
 
 # move
 find $HOME -type f -name "*.txt" -exec move {} ./new_dir/ \;
-
-
-0 4 1 * * rm /mnt/data/tmp_upload_images/trash_can/* -rf
-
-0 4 * * * find /mnt/data/tmp_upload_images/trash_can -type f -ctime +30 -exec rm {} -f \;
-5 4 * * * find /mnt/data/tmp_upload_images/trash_can -type d -ctime +30 -exec rm {} -d -f \;
 ```
 
 > ref: [Linux manual page - find](https://man7.org/linux/man-pages/man1/find.1.html)
