@@ -1,10 +1,10 @@
 ---
 title: Other Cheat Sheet
-date: "2022-10-10"
+date: 2022-10-10
 tags:
   - cheat-sheet
-aliases:
-  - my-other-cheat-sheet
+slug: my-other-cheat-sheet
+
 ---
 
 My other cheat Sheet

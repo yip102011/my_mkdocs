@@ -1,6 +1,6 @@
 ---
 title: SSH - 使用私錀登入
-date: "2022-10-03"
+date: 2022-10-03
 tags:
   - ssh
   - linux

@@ -1,6 +1,6 @@
 ---
 title: Deploy my resume html page to cloudflare
-date: "2022-12-13"
+date: 2022-12-13
 tags:
   - cloudflare-pages
   - cloudflare

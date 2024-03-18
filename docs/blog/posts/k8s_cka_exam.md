@@ -1,12 +1,12 @@
 ---
 title: K8S CKA 考試總結
-date: "2022-12-10"
+date: 2022-12-10
 tags:
   - kubernetes
   - exam
   - cka
-aliases:
-  - k8s-cka-exam
+slug: k8s-cka-exam
+
 ---
 
 考了 k8S CKA 證書，總結一下經過和要點。

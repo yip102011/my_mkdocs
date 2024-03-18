@@ -3,8 +3,8 @@ title: Error Cheat Sheet
 tags:
   - error
   - cheat-sheet
-aliases:
-  - error-cheat-sheet
+slug: error-cheat-sheet
+
 ---
 
 # Errors

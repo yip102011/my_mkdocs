@@ -1,12 +1,12 @@
 ---
 title: How to mount minio bucket as linux folder
-date: "2023-02-22"
+date: 2023-02-22
 tags:
   - minio
   - s3fs
   - s3
-aliases:
-  - how-to-mount-minio-bucket-as-linux-folder
+slug: how-to-mount-minio-bucket-as-linux-folder
+
 ---
 
 <!--more-->

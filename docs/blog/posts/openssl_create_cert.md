@@ -1,11 +1,11 @@
 ---
 title: OpenSSL - 使用 openssl 生成 TLS 憑證
-date: "2022-05-01"
+date: 2022-05-01
 tags:
   - openssl
   - tls
-aliases:
-  - openssl-create-cert
+slug: openssl-create-cert
+
 ---
 
 如何使用 openssl 生成 TLS 需要的憑證

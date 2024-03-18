@@ -1,17 +1,19 @@
 ---
-title: mariadb - export import large database
-date: "2023-05-15"
+title: Mariadb - export import large database
+date: 2023-05-15
 tags:
   - mariadb
   - export-import
   - large-database
-aliases:
-  - mariadb-export-import-large-database
+slug: mariadb-export-import-large-database
+
 ---
 
-how to speed up for import and export large databse
+# How to export import large database
 
-<!--more-->
+This post is example to export and import a large database.
+
+<!-- more -->
 
 ## check table size
 

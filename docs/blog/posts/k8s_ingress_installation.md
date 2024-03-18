@@ -1,11 +1,11 @@
 ---
 title: K8S - 安裝 ingress nginx
-date: "2021-10-31"
+date: 2021-10-31
 tags:
   - kubernetes
   - ingress-nginx
-aliases:
-  - k8s-ingress-installation
+slug: k8s-ingress-installation
+
 ---
 
 如何安裝 ingress-nginx

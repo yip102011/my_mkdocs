@@ -1,11 +1,11 @@
 ---
 title: Linux Cheat Sheet
-date: "2022-10-10"
+date: 2022-10-10
 tags:
   - linux
   - cheat-sheet
-aliases:
-  - my-linux-cheat-sheet
+slug: my-linux-cheat-sheet
+
 ---
 
 My linux cheat Sheet base on Ubuntu

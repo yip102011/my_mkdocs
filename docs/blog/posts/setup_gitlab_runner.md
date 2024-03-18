@@ -1,14 +1,14 @@
 ---
 title: setup gitlab runner with cacheable docker executor
-date: "2023-02-14"
+date: 2023-02-14
 tags:
   - gitlab
   - gitlab-runner
   - gitlab-ci
   - devops
   - ci-cd
-aliases:
-  - setup-gitlab-runner-with-cacheable-dind
+slug: setup-gitlab-runner-with-cacheable-dind
+
 ---
 
 When using gitlab ci, it always take a long time to build docker image because cache is not used.  

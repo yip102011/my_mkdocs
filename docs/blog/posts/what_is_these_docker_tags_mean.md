@@ -1,11 +1,11 @@
 ---
 title: what is these docker tags mean (bullseye, slim, alpine, jammy)?
-date: "2023-01-26"
+date: 2023-01-26
 tags:
   - docker
   - docker-tag
-aliases:
-  - what-is-these-docker-tags-mean-bullseye-slim-alpine-jammy?
+slug: what-is-these-docker-tags-mean-bullseye-slim-alpine-jammy?
+
 ---
 
 When first time seeing all this docker tag, i am very confused about what is these tag and which should i pick.  

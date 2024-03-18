@@ -1,12 +1,12 @@
 ---
 title: K8S - TLS with ingress nginx
-date: "2022-04-25"
+date: 2022-04-25
 tags:
   - kubernetes
   - ingress-nginx
   - tls
-aliases:
-  - k8s-ingress-tls
+slug: k8s-ingress-tls
+
 ---
 
 教你使用 Proxy 跟 HTTPS 的 3 種模式

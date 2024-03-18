@@ -4,8 +4,8 @@ tags:
   - k8s
   - kubernetes
   - cheat-sheet
-aliases:
-  - k8s-cheat-sheet
+slug: k8s-cheat-sheet
+
 ---
 
 ## Kubernetes
