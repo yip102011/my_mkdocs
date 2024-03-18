@@ -127,7 +127,7 @@ Keep watching if you don't want to use socket binding or shell executor and want
 7. start container `cd ${DEPLOY_FOLDER} && docker compose up -d --wait`
 8. view logs `docker compose logs -n 100 -f`
 
-you can download [single script file here]("setup_gitlab_runner/setup_gitlab_runnere.txt")
+you can download [single script file here]("/blog/setup_gitlab_runner/setup_gitlab_runner.sh")
 
 ## create gitlab-ci file
 

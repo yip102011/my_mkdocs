@@ -40,7 +40,7 @@ https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be54
 但是因為是遠程控制 VM，移動 firefox 的時候非常慢，盡量不要動它，mousepad 跟 terminal 倒是很順暢，設定都不用改。PSI 瀏覽器會佔了上面一部份畫面，畫面會比較小。  
 因為不能紀錄真畫面，這是在 killercoda 模擬出來的，有需要可以自己試試。  
 https://killercoda.com/kimwuestkamp/scenario/cks-cka-ckad-remote-desktop
-![](k8s_cka_exam\exam_env_vm.png)
+![](k8s_cka_exam/exam_env_vm.png)
 
 ## 題目
 
