@@ -27,8 +27,8 @@ site_author: Isaac Yip
 #   minutes – searchable, customizable, in 60+ languages, for all devices
 
 # Repository
-# repo_name: squidfunk/mkdocs-material
-# repo_url: https://github.com/squidfunk/mkdocs-material
+repo_name: yip102011/my_mkdocs
+repo_url: https://github.com/yip102011/my_mkdocs
 
 # Copyright
 # copyright: Copyright &copy; 2016 - 2023 Martin Donath
@@ -99,20 +99,47 @@ theme:
 # Plugins
 plugins:
   - search:
-      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
       # lang: en
       lang:
         - en
         - zh
+      jieba_dict: dict.txt.big
+      boost: 2 
+      pipeline:
+        - stemmer
+        - stopWordFilter
+        - trimmer
   - blog:
       enabled: true
       blog_dir: blog
       blog_toc: true
       post_date_format: yyyy-MM-dd
-      archive: true
-      archive_date_format: yyyy-MM
       post_url_format: "{slug}"
+      post_excerpt_separator: <!-- more -->
+      post_readtime: false
+      # post_readtime_words_per_minute: 300
+      archive: true
       archive_toc: true
+      archive_date_format: yyyy-MM
+      archive_url_date_format: yyyy-MM
+      archive_url_format: "archive/{date}"
+      # archive_pagination: false
+      # archive_pagination_per_page: 5
+      pagination: true
+      pagination_per_page: 5
+      pagination_url_format: "page/{page}"
+      pagination_format: "$link_first $link_previous ~2~ $link_next $link_last"
+      pagination_if_single_page: false
+      pagination_keep_content: false
+  - social:
+      enabled: true
+      cards: true
+      cards_layout: default/variant
+  - tags:
+      enabled: true
+
+
   # - minify:
   #     minify_html: true
 
@@ -166,10 +193,6 @@ markdown_extensions:
       # pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.keys
-  - pymdownx.magiclink:
-      repo_url_shorthand: true
-      user: squidfunk
-      repo: mkdocs-material
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences:
@@ -183,7 +206,7 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
 # Page tree
-#nav:
+# nav:
 #- Home: index.md
 # - Getting started:
 #   - Installation: getting-started.md
