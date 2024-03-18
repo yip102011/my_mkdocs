@@ -9,9 +9,8 @@ slug: how-to-mount-minio-bucket-as-linux-folder
 
 ---
 
-<!--more-->
-
-# How to mount minio bucket as linux folder
+This post teach you how to mount a minio bucket as a folder.
+<!-- more -->
 
 1. install [s3fs-fuse](https://github.com/s3fs-fuse/s3fs-fuse)
 

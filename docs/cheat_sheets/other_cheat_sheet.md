@@ -9,7 +9,7 @@ slug: my-other-cheat-sheet
 
 My other cheat Sheet
 
-<!--more-->
+<!-- more -->
 
 ## Docker
 

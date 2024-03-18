@@ -10,7 +10,7 @@ slug: my-linux-cheat-sheet
 
 My linux cheat Sheet base on Ubuntu
 
-<!--more-->
+<!-- more -->
 
 ## basic
 

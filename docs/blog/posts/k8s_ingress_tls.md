@@ -11,11 +11,7 @@ slug: k8s-ingress-tls
 
 教你使用 Proxy 跟 HTTPS 的 3 種模式
 
-<!--more-->
-
-# 如何在 K8S 設定 HTTPS
-
-## 使用 Proxy 跟 HTTPS 的 3 種模式
+<!-- more -->
 
 ### TLS termination
 
@@ -23,7 +19,7 @@ nginx 把 HTTP 解密後以明文方或傳送到後方。
 
 - 設定方便，只需設定 nginx
 - 安全性較低
-  ![Img](01277271.png)
+  ![](k8s_ingress_tls/01277271.png)
 
 ### TLS passthrough
 
@@ -31,7 +27,7 @@ nginx 不進行解密，用 TCP protocol 傳送資料到 API。
 
 - 由於 nginx 不解密，部份功能無法使用，例如修改 HTTP Header，把內容傳送到 log 系統等等
 - 安全性比 TLS termination 高
-  ![Img](68606a2b.png)
+  ![](k8s_ingress_tls/68606a2b.png)
 
 ### TLS termination + TLS backend
 
@@ -40,7 +36,7 @@ nginx 把 HTTP 解密後，再使用 TLS 加密才傳送到後方，兩段 HTTPS
 - 安全性比 TLS termination 高，比 TLS passthrough 低
 - nginx 可以進行解密，並使用修改 HTTP Header，log 等功能
 - 設定繁瑣
-  ![Img](c749fde9.png)
+  ![](k8s_ingress_tls/c749fde9.png)
 
 ## 建立 Namespace
 

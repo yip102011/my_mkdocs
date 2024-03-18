@@ -10,9 +10,7 @@ slug: k8s-ingress-installation
 
 如何安裝 ingress-nginx
 
-<!--more-->
-
-# 安裝 ingress nginx
+<!-- more -->
 
 ## 前言
 
@@ -33,7 +31,7 @@ slug: k8s-ingress-installation
 官網有提供各種安裝的選擇
 [Installation Guide - NGINX Ingress Controller (kubernetes.github.io)](https://kubernetes.github.io/ingress-nginx/deploy/#contents)
 
-![image-20211031174345205](ingress-nginx-install-guide.png)
+![](k8s_ingress_installation/ingress-nginx-install-guide.png)
 
 此文使用 Docker Desktop. 如果 k8s 是安裝在伺服器上，請選擇 Bare-metal.
 
@@ -43,7 +41,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 可以看到 k8s 會建立一堆資源
 
-![image-20211031183547661](image-20211031183547661.png)
+![](k8s_ingress_installation/image-20211031183547661.png)
 
 用以下命令查看資源狀態，可以看到 `EXTERNAL-IP` 是 localhost。
 
@@ -51,19 +49,19 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 kubectl get all -n ingress-nginx
 ```
 
-![image-20211031202514264](image-20211031202514264.png)
+![](k8s_ingress_installation/image-20211031202514264.png)
 
 Ingress controller 啟動後需要一定時間取得 `EXTERNAL-IP` ，如顯示 pending，請等待 1-2 分鐘。
 
 在 browser 輸入網址 <http://localhost/> 可以看到以下畫面，代表安裝成功。
 
-![image-20211031202648423](image-20211031202648423.png)
+![](k8s_ingress_installation/image-20211031202648423.png)
 
 如果 `EXTERNAL-IP` 一直顯示 `pending`，可以賞試在 Docker Desktop Troubleshoot 頁面 Reset Kubernetes cluster 然後重新啟動 Docker Desktop.
 
 再重新安裝 ingress-nginx.
 
-![image-20211031202920522](image-20211031202920522.png)
+![](k8s_ingress_installation/image-20211031202920522.png)
 
 ### Bare-metal ingress
 

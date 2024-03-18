@@ -14,7 +14,7 @@ slug: setup-gitlab-runner-with-cacheable-dind
 When using gitlab ci, it always take a long time to build docker image because cache is not used.  
 Here is how to setup executer using local cache to speedup build time.
 
-<!--more-->
+<!-- more -->
 
 ## When do you need this?
 
@@ -127,7 +127,7 @@ Keep watching if you don't want to use socket binding or shell executor and want
 7. start container `cd ${DEPLOY_FOLDER} && docker compose up -d --wait`
 8. view logs `docker compose logs -n 100 -f`
 
-you can download [single script file here]("/setup_gitlab_runnere.sh")
+you can download [single script file here]("setup_gitlab_runner/setup_gitlab_runnere.txt")
 
 ## create gitlab-ci file
 
@@ -148,7 +148,7 @@ build-docker-image:
     - docker push "${CI_REGISTRY}/apps/${CI_PROJECT_PATH_SLUG}:latest"
 ```
 
-![](gitlab_pipline_result.png)
+![](setup_gitlab_runner/gitlab_pipline_result.png)
 I am using a new dotnet webapi as demo, the first build takes 01:18 but second build only take 18s with code update. As long as you don't update `.csproj` file, you can use docker build layer local cache.
 
 you can watch job container created inside dind container when trigger job
@@ -157,7 +157,7 @@ you can watch job container created inside dind container when trigger job
 docker exec -t dind watch -n 1 docker ps
 ```
 
-![](dind_docker_ps.png)
+![](setup_gitlab_runner/dind_docker_ps.png)
 
 also setup crontab to clearup every month prevent disk full
 

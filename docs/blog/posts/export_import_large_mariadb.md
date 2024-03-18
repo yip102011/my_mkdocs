@@ -9,9 +9,7 @@ slug: mariadb-export-import-large-database
 
 ---
 
-# How to export import large database
-
-This post is example to export and import a large database.
+This post is example to export and import a large Mariadb database.
 
 <!-- more -->
 

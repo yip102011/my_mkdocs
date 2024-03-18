@@ -11,9 +11,9 @@ slug: what-is-these-docker-tags-mean-bullseye-slim-alpine-jammy?
 When first time seeing all this docker tag, i am very confused about what is these tag and which should i pick.  
 Here i write down some tag that i know.
 
-<!--more-->
-
 Most of these tag represent different versions of linux such as debian, ubuntu, alpine.
+
+<!-- more -->
 
 ## Alpine
 
