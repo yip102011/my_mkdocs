@@ -63,7 +63,7 @@ dig @host.docker.internal isaac-coredns-example.com
 coredns-example.com.    3600    IN      A       192.168.0.1
 
 ;; Query time: 0 msec
-;; SERVER: 192.168.210.176#53(host.docker.internal) (UDP)
+;; SERVER: 192.168.0.100#53(host.docker.internal) (UDP)
 ;; WHEN: Mon Apr 08 12:59:24 HKT 2024
 ;; MSG SIZE  rcvd: 95
 ```
