@@ -1,6 +1,6 @@
 ---
 title: Deploy DNS server with CoreDNS in Docker
-date: 2023-02-14
+date: 2023-04-08
 tags:
   - dns
   - dns-server
