@@ -4,7 +4,7 @@ date: 2023-01-26
 tags:
   - docker
   - docker-tag
-slug: what-is-these-docker-tags-mean-bullseye-slim-alpine-jammy?
+slug: what-is-these-docker-tags-mean-bullseye-slim-alpine-jammy
 
 ---
 
