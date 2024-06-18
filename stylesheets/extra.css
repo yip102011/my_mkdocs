@@ -1,0 +1,7 @@
+header.md-header > nav > a.md-logo{
+    margin: 0px;
+    padding: 0px;
+}
+header.md-header > nav > a.md-logo > img{
+    height: 45px;
+}

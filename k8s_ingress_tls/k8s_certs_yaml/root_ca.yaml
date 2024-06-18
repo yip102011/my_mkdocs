@@ -1,0 +1,33 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: selfsigned-issuer
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: root-ca
+spec:
+  isCA: true
+  commonName: Root CA
+  secretName: root-ca
+  usages: 
+    - signing
+    - cert sign
+    - crl sign
+  privateKey:
+    encoding: PKCS8
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-issuer
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: root-ca-issuer
+spec:
+  ca:
+    secretName: root-ca
