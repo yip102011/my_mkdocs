@@ -1,70 +1,47 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+# -----------------------------------------------------------------------------
+# Node, TypeScript, Python
+# -----------------------------------------------------------------------------
 
-# C extensions
-*.so
+# Dependencies
+node_modules
+__pycache__
+venv
+.venv
 
-# Distribution / packaging
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-node_modules/
-parts/
-sdist/
-var/
-package*.json
-*.egg-info/
-.installed.cfg
-*.egg
+# Build files
+build
+site
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+# Distribution files
+dist
+mkdocs_material.egg-info
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
+# Caches and logs
+*.cpuprofile
+*.log
+*.tsbuildinfo
 .cache
-nosetests.xml
-coverage.xml
-*,cover
-.hypothesis/
+.eslintcache
+__pycache__
 
-# Translations
-*.mo
+# Examples
+example
+example.zip
 
-# Scrapy stuff:
-.scrapy
+# -----------------------------------------------------------------------------
+# General
+# -----------------------------------------------------------------------------
 
-# PyBuilder
-target/
+# Never ignore .gitkeep files
+!**/.gitkeep
 
-# IPython Notebook
-.ipynb_checkpoints
+# macOS internals
+.DS_Store
 
-# pyenv
-.python-version
+# Temporary files
+TODO
+tmp
 
-# virtualenv
-venv/
-ENV/
-
-# MkDocs documentation
-site*/
+# IDEs & Editors
+.idea
+*~

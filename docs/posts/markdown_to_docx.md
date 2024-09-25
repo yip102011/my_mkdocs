@@ -46,4 +46,4 @@ Install pandoc from https://pandoc.org/installing.html
    ![](markdown_to_docx/vscode_settings.png)
 
 5. exoprt markdown to docx file
-   ![](vscode_export.png)
+   ![](markdown_to_docx/vscode_export.png)

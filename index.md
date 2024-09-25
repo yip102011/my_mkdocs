@@ -1,2 +1,0 @@
-# The Docing of Isaac
-
