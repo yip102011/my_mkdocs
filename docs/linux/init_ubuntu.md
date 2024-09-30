@@ -1,4 +1,22 @@
-# init ubuntu
+---
+date: 2024-10-10
+tags:
+  - linux
+slug: init-ubuntu
+---
+# Init Ubuntu
+
+This document is to record those comment stuff that i do to setup Ubuntu.
+
+<!-- more -->
+
+## versions
+
+|                | Version                           |
+| -------------- | --------------------------------- |
+| OS             | Ubuntu 24.04.1 LTS (Noble Numbat) |
+| Docker         | 27.3.1                            |
+| Docker Compose | 2.29.7                            |
 
 ## allow user sudo without password
 
@@ -55,6 +73,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ```
 
 ### allow docker command without sudo
+
 ```bash
 # create linux user group name docker
 sudo groupadd docker
@@ -65,6 +84,7 @@ newgrp docker
 # test
 docker run hello-world
 ```
+
 ### set docker root dir
 
 ```bash
