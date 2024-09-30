@@ -1,12 +1,20 @@
 ---
 date: 2024-10-10
+slug: init-ubuntu
+summary: A document of my Ubuntu init setup.
+icon: material/ubuntu
+categories:
+  - linux
 tags:
   - linux
-slug: init-ubuntu
+comments: true
+authors:
+  - Isaac Yip
 ---
+
 # Init Ubuntu
 
-This document is to record those comment stuff that i do to setup Ubuntu.
+A document of my Ubuntu init setup.
 
 <!-- more -->
 
