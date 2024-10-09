@@ -138,12 +138,17 @@ echo 1 | sudo tee /sys/class/block/sda/device/rescan
 # resize disk
 sudo cfdisk # step: resize > write > quit
 
+# resize pv
+sudo pvresize /dev/sda3
+
 # extend logical volumes
-sudo lvdisplay
 sudo lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
 
-# resize
-resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+# display lv
+sudo lvdisplay
+
+# resize filesystem
+sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 ```
 
 ## disable swap and kswapd0
