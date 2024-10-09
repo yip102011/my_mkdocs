@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: api-server-cert
+spec:
+  isCA: false
+  secretName: api-server-cert
+  commonName: API Server Cert
+  dnsNames:
+    - localhost
+    - api-server.test
+  usages: 
+    - digital signature
+    - key encipherment
+    - server auth
+  privateKey:
+    encoding: PKCS8
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: inter-ca-issuer
