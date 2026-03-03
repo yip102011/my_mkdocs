@@ -138,19 +138,31 @@ echo 1 | sudo tee /sys/class/block/sda/device/rescan
 # resize disk
 sudo cfdisk # step: resize > write > quit
 
+# resize pv
+sudo pvresize /dev/sda3
+
 # extend logical volumes
-sudo lvdisplay
 sudo lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
 
-# resize
-resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+# display lv
+sudo lvdisplay
+
+# resize filesystem
+sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 ```
 
 ## disable swap and kswapd0
 
 ```bash
+# edit file `/etc/fstab` and comment swap line
+sudo vim /etc/fstab
+## /swap.img       none    swap    sw      0       0
+
 # turnoff swap
 swapoff -a
+
+# checking
+free -h
 
 # 0 swappiness really prevents from any swapping even if there is a swap storage available
 echo 'vm.swappiness=0' | sudo tee /etc/sysctl.d/swappiness_zero.conf
