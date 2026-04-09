@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nginx-server-cert
+spec:
+  isCA: false
+  secretName: nginx-server-cert
+  commonName: Nginx Server Cert
+  dnsNames:
+    - localhost
+    - nginx-server.test
+  usages: 
+    - digital signature
+    - key encipherment
+    - server auth
+  privateKey:
+    encoding: PKCS8
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: inter-ca-issuer
