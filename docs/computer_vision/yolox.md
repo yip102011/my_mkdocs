@@ -54,7 +54,7 @@ docker exec yolox find /workspace/YOLOX/YOLOX_outputs/yolox_s/vis_res/ -name she
 ## 複製結果到本機
 docker cp yolox:/workspace/dog.jpg ./result-dog.jpg
 ```
-![result-dog.jpg](yolox\result-dog.jpg)
+![result-dog.jpg](yolox/result-dog.jpg)
 
 在網上下載照片測試
 ```bash
@@ -67,7 +67,7 @@ docker exec yolox find /workspace/YOLOX/YOLOX_outputs/yolox_s/vis_res/ -name hor
 ## 複製結果到本機
 docker cp yolox:/workspace/horse.jpg ./result-horse.jpg
 ```
-![result-horse.jpg](yolox\result-horse.jpg)
+![result-horse.jpg](yolox/result-horse.jpg)
 
 預訓練模型基於 COCO2017 數據集訓練，可以偵測80種物件。可偵測物件列表: <https://github.com/Megvii-BaseDetection/YOLOX/blob/main/yolox/data/datasets/coco_classes.py>
 
